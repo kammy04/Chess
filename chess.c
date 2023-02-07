@@ -1,11 +1,15 @@
 #include <stdio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 // ♔ ♕ ♖ ♗ ♘ ♙
 <<<<<<< HEAD
 void showBoard (int board[8][9]) {
 
+=======
+#include <stdbool.h>
+>>>>>>> origin/gridlines
 
 // ♔ ♕ ♖ ♗ ♘ ♙
 
@@ -21,6 +25,7 @@ void showBoard (int board[8][9]) {
  
 */
 void showBoard (int board[8][8]) {
+<<<<<<< HEAD
 	printf("\n\n╔════════╗\n");
 	for (int i = 0; i < 8; i++) {
 		printf("║"); 
@@ -33,6 +38,20 @@ void showBoard (int board[8][8]) {
 		for (int j = 0; j < 8; j++) {
 			if (board[i][j] == 0) {
 				if ((i + j) % 2 == 0) {
+=======
+	printf("\n\n┌─┬─┬─┬─┬─┬─┬─┬─┐\n");
+	for (int i = 0; i < 8; i++) {
+//		printf("│"); 
+		bool flag = true;
+		for (int j = 0; j < 8; j++) {
+			if (!flag) {
+				printf("│"); 
+			}
+			flag = false;
+//			printf(""); 
+			switch (board[i][j]) {
+				case 0: 
+>>>>>>> origin/gridlines
 					printf(" ");
 				} else {
 					printf("▒");
@@ -51,9 +70,18 @@ void showBoard (int board[8][8]) {
 				printf("♙");
 			}
 		}
+<<<<<<< HEAD
 		printf("\n");
 	}
 	printf("╚════════╝\n");
+=======
+		printf("│\n") ;
+		if (i < 7) {
+			printf("├─┼─┼─┼─┼─┼─┼─┼─┤\n") ;
+		}
+	}
+	printf("└─┴─┴─┴─┴─┴─┴─┴─┘\n");
+>>>>>>> origin/gridlines
 }
 =======
 #include <stdbool.h>
@@ -83,6 +111,7 @@ bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) ;
 int main () {
 	printf("Welcome to Terminal Chess!\n");
 	printf("Initializing Board...")	;
+<<<<<<< HEAD
 	int board [8][8]  = { {5, 4, 3, 1, 2, 3, 4, 5}
  				        , {6, 6, 6, 6, 6, 6, 6, 6}
  				 	    , {0, 0, 0, 0, 0, 0, 0, 0}
@@ -92,6 +121,17 @@ int main () {
  				        , {6, 6, 6, 6, 6, 6, 6, 6}
 				        , {5, 4, 3, 1, 2, 3, 4, 5}
 				        } ;
+=======
+	int board [8][8] = { {5, 4, 3, 2, 1, 3, 4, 5}
+				       , {6, 6, 6, 6, 6, 6, 6, 6}
+				 	   , {0, 0, 0, 0, 0, 0, 0, 0}
+					   , {0, 0, 0, 0, 0, 0, 0, 0}
+				       , {0, 0, 0, 0, 0, 0, 0, 0} 
+				       , {0, 0, 0, 0, 0, 0, 0, 0}
+				       , {6, 6, 6, 6, 6, 6, 6, 6}
+				       , {5, 4, 3, 2, 1, 3, 4, 5}
+				       } ;
+>>>>>>> origin/gridlines
 	printf("Board Initialized!") ;
 	
 	showBoard(board);
