@@ -10,6 +10,7 @@ void showBoard (int board[8][9]) {
 =======
 #include <stdbool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/gridlines
 
 // ♔ ♕ ♖ ♗ ♘ ♙
@@ -217,6 +218,11 @@ void makeMove (char* input, int board[8][8]) {
 	board[end_x][end_y] = board[start_x][start_y];
 >>>>>>> origin/piece_movement
 }
+=======
+#include <stdlib.h>
+
+bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) ;
+>>>>>>> origin/valid_move_checks
 
 int main () {
 	printf("Welcome to Terminal Chess!\n");
@@ -301,6 +307,7 @@ int main () {
 }
 
 bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) {
+<<<<<<< HEAD
 	int xcheck = x1;
 	int ycheck = y1;
 	int piecesInWay = 0;
@@ -314,10 +321,16 @@ bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) {
 	} else if (board[x1][y2] == 2) { 
 =======
 	} else if (board[x1][x2] == 1) { 
+=======
+	if (board[x1][y2] == 0) {
+		return false;
+	} else if (board[x1][y2] == 1) { 
+>>>>>>> origin/valid_move_checks
 		if (abs(x1 - x2) <= 1 && abs(y1-y2) <= 1) {
 			return true;
 		}
 		// king
+<<<<<<< HEAD
 	} else if (board[x1][x2] == 2) { 
 >>>>>>> origin/king
 		// queen
@@ -360,6 +373,28 @@ bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) {
 				break;
 			}
 			if (xcheck == x2 && ycheck == y2) {
+=======
+	} else if (board[x1][y2] == 2) { 
+		// queen
+	} else if (board[x1][y2] == 3) { 
+		// bishop
+	} else if (board[x1][x2] == 4) { // knight
+		if (abs(x1 - x2) == 1) {
+			if (abs(y2 - y1) == 2) {
+				return true;
+			}
+		} else if (abs(x1 - x2) == 2) {
+			if (abs(y2 - y1) == 1) {
+				return true;
+			}
+		}
+		
+	} else if (board[x1][y2] == 5) { 
+		// Rook
+	} else if (board[x1][x2] == 6) { // Pawn
+		if (y1 - y2 == 1 && x1 == x2) { // forward one
+			if (board[x1][y2] == 0) {
+>>>>>>> origin/valid_move_checks
 				return true;
 			}
 		}
