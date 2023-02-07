@@ -1,4 +1,5 @@
 #include <stdio.h>
+<<<<<<< HEAD
 
 int main () {
 	printf("Welcome to Terminal Chess!\n");
@@ -19,4 +20,24 @@ int main () {
 	// rest of game...
 	
 	printf("Terminating...");
+  char buf[100];
+  bool whitesMove = true;
+	printf("Board Initialized!\n") ;
+	
+// 	showBoard(board);
+
+  printf("Enter `q` to quit at any time.\n");
+  printf("Moves are entered as co-ordinate pairs, such as \"13-33\" \n");
+  do {
+    if (whitesMove) {
+      printf("White to move.\n");
+    } else {
+      printf("Black to move.\n");
+    }
+    printf("♔ >> ");
+    scanf("%s", buf);
+  } while (buf[0] != 'q' && buf[0] != 'Q') ;
+    
+	printf("Terminating...\n") ;
+>>>>>>> origin/Game_Logic
 }
