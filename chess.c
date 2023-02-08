@@ -1,21 +1,15 @@
 #include <stdio.h>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
 // ♔ ♕ ♖ ♗ ♘ ♙
-<<<<<<< HEAD
 void showBoard (int board[8][9]) {
 
-=======
+
 #include <stdbool.h>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/gridlines
 
 // ♔ ♕ ♖ ♗ ♘ ♙
 
-<<<<<<< HEAD
+
 /* ┌ └ ┐ ┘
 
 ├ ┤ ┬ ┴
@@ -28,20 +22,16 @@ void showBoard (int board[8][9]) {
  
 */
 void showBoard (int board[8][8]) {
-<<<<<<< HEAD
 	printf("\n\n╔════════╗\n");
 	for (int i = 0; i < 8; i++) {
 		printf("║"); 
-=======
 void showBoard (int board[8][8]) {
 	printf("\n\n  01234567\n");
 	for (int i = 0; i < 8; i++) {
 		printf("%d ", i); 
->>>>>>> coordinates
 		for (int j = 0; j < 8; j++) {
 			if (board[i][j] == 0) {
 				if ((i + j) % 2 == 0) {
-=======
 	printf("\n\n┌─┬─┬─┬─┬─┬─┬─┬─┐\n");
 	for (int i = 0; i < 8; i++) {
 //		printf("│"); 
@@ -54,7 +44,7 @@ void showBoard (int board[8][8]) {
 //			printf(""); 
 			switch (board[i][j]) {
 				case 0: 
->>>>>>> origin/gridlines
+
 					printf(" ");
 				} else {
 					printf("▒");
@@ -73,26 +63,23 @@ void showBoard (int board[8][8]) {
 				printf("♙");
 			}
 		}
-<<<<<<< HEAD
+
 		printf("\n");
 	}
 	printf("╚════════╝\n");
-=======
 		printf("│\n") ;
 		if (i < 7) {
 			printf("├─┼─┼─┼─┼─┼─┼─┼─┤\n") ;
 		}
 	}
 	printf("└─┴─┴─┴─┴─┴─┴─┴─┘\n");
->>>>>>> origin/gridlines
+
 }
-=======
+
 #include <stdbool.h>
 #include <stdlib.h>
 
 bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) ;
->>>>>>> origin/Spennys_branch
-=======
 #include <stdlib.h>
 
 bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) ;
@@ -189,19 +176,16 @@ bool isValidMove (char* input, int board[8][8]) {
 		return false;
 	}
 	*/
-=======
 void showBoard(int board[8][8]) {
 	printf("Added on another branch...\n");
 }
 
 bool isValidMove (char* input, int board[8][8]) {
 	// Add move validity checks some other time! Too lazy!! 
->>>>>>> origin/piece_movement
 	return true;
 }
 
 void makeMove (char* input, int board[8][8]) {
-<<<<<<< HEAD
 	int start_y = input[0] - 48;
 	int start_x = input[1] - 48;
 	int end_y = input[3] - 48;
@@ -209,20 +193,16 @@ void makeMove (char* input, int board[8][8]) {
 	
 	board[end_x][end_y] = board[start_x][start_y];
 	board[start_x][start_y] = 0;
-=======
 	int start_x = input[0] - 48;
 	int start_y = input[1] - 48;
 	int end_x = input[3] - 48;
 	int end_y = input[4] - 48;
 	
 	board[end_x][end_y] = board[start_x][start_y];
->>>>>>> origin/piece_movement
 }
-=======
 #include <stdlib.h>
 
 bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) ;
->>>>>>> origin/valid_move_checks
 
 int main () {
 	printf("Welcome to Terminal Chess!\n");
@@ -236,13 +216,12 @@ int main () {
 				             , {6, 6, 6, 6, 6, 6, 6, 6}
 				             , {5, 4, 3, 1, 2, 3, 4, 5}
 				             } ;
->>>>>>> origin/king
   char buf[100];
   bool whitesMove = true;
 	printf("Board Initialized!\n") ;
 // 	showBoard(board);
 
-<<<<<<< HEAD
+
   printf("Enter `q` to quit at any time.\n");
   printf("Moves are entered as co-ordinate pairs, such as \"13-33\" \n");
   do {
@@ -260,21 +239,16 @@ int main () {
     	printf("♔ >> ");
 	scanf("%s", buf);
 	flag = true;
-<<<<<<< HEAD
     } while (!isValidMove(buf, board));
     makeMove(buf, board);
     whitesMove = !whitesMove;
-=======
     } while (!isValidMove(buf, board) && buf[0] != 'q' && buf[0] != 'Q');
     makeMove(buf, board);
->>>>>>> origin/piece_movement
   } while (buf[0] != 'q' && buf[0] != 'Q') ;
 	printf("Terminating...") ;
-=======
 int main () {
 	printf("Welcome to Terminal Chess!\n");
 	printf("Initializing Board...")	;
-<<<<<<< HEAD
 	int board [8][8]  = { {5, 4, 3, 1, 2, 3, 4, 5}
  				        , {6, 6, 6, 6, 6, 6, 6, 6}
  				 	    , {0, 0, 0, 0, 0, 0, 0, 0}
@@ -284,7 +258,6 @@ int main () {
  				        , {6, 6, 6, 6, 6, 6, 6, 6}
 				        , {5, 4, 3, 1, 2, 3, 4, 5}
 				        } ;
-=======
 	int board [8][8] = { {5, 4, 3, 2, 1, 3, 4, 5}
 				       , {6, 6, 6, 6, 6, 6, 6, 6}
 				 	   , {0, 0, 0, 0, 0, 0, 0, 0}
@@ -294,7 +267,6 @@ int main () {
 				       , {6, 6, 6, 6, 6, 6, 6, 6}
 				       , {5, 4, 3, 2, 1, 3, 4, 5}
 				       } ;
->>>>>>> origin/gridlines
 	printf("Board Initialized!") ;
 	
 	showBoard(board);
@@ -303,36 +275,28 @@ int main () {
 	
 	printf("Terminating...");
 	
->>>>>>> coordinates
 }
 
 bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) {
-<<<<<<< HEAD
 	int xcheck = x1;
 	int ycheck = y1;
 	int piecesInWay = 0;
 	if (board[x1][x2] == 0) {
 		return false;
-<<<<<<< HEAD
 	} else if (board[x1][y2] == 1) { // king
 		if (abs(x1 - x2) <= 1 && abs(y1-y2) <= 1) {
 			return true;
 		}
 	} else if (board[x1][y2] == 2) { 
-=======
 	} else if (board[x1][x2] == 1) { 
-=======
 	if (board[x1][y2] == 0) {
 		return false;
 	} else if (board[x1][y2] == 1) { 
->>>>>>> origin/valid_move_checks
 		if (abs(x1 - x2) <= 1 && abs(y1-y2) <= 1) {
 			return true;
 		}
 		// king
-<<<<<<< HEAD
 	} else if (board[x1][x2] == 2) { 
->>>>>>> origin/king
 		// queen
 	} else if (board[x1][y2] == 3) {  // bishop
 		while (true) {
@@ -373,7 +337,6 @@ bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) {
 				break;
 			}
 			if (xcheck == x2 && ycheck == y2) {
-=======
 	} else if (board[x1][y2] == 2) { 
 		// queen
 	} else if (board[x1][y2] == 3) { 
@@ -394,7 +357,6 @@ bool isValidMove (int x1, int x2, int y1, int y2, int board[8][8]) {
 	} else if (board[x1][x2] == 6) { // Pawn
 		if (y1 - y2 == 1 && x1 == x2) { // forward one
 			if (board[x1][y2] == 0) {
->>>>>>> origin/valid_move_checks
 				return true;
 			}
 		}
