@@ -207,10 +207,10 @@ int main () {
     	printf("♔ >> ");
 	scanf("%s", buf);
 	flag = true;
-    } while (!isValidMove(buf, board));
-    makeMove(buf, board);
-    whitesMove = !whitesMove;
-	showBoard(board);
+    } while (!isValidMove(buf, board) && buf[0] != 'q' && buf[0] != 'Q');
+	    makeMove(buf, board);
+	    whitesMove = !whitesMove;
+		showBoard(board);
 
   } while (buf[0] != 'q' && buf[0] != 'Q') ;
     
