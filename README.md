@@ -2,7 +2,7 @@
 
 A chess engine and terminal chess game written in modern C++. You can play against a friend or against the engine, or watch the engine play itself.
 
-The project started as a 220-line C starter from McMaster's 2XC3 course (kept in [`legacy/`](legacy/) for comparison) and was rebuilt from scratch in C++.
+It's also a learning project: every line of the code is commented for someone new to C++, and [LEARNING.md](LEARNING.md) is a step-by-step guide to the language using this codebase.
 
 ## Features
 
@@ -62,8 +62,7 @@ include/chess/   public headers: types, move, board, move_generator, evaluator, 
 src/             implementations (+ private header offsets.hpp)
 app/main.cpp     terminal UI, perft and bench tools
 tests/           GoogleTest suite
-legacy/          the original C starter, unchanged
-LEARNING.md      design notes, C/C++/Kotlin comparisons, interview explanations
+LEARNING.md      C++ from zero, chess-engine glossary, design explanations
 ```
 
 ## Roadmap

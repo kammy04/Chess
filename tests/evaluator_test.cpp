@@ -1,3 +1,10 @@
+// =============================================================================
+// evaluator_test.cpp: tests for the position-scoring code
+// =============================================================================
+// The key test is MirroredPositionsAreSymmetric: if you flip the board and
+// swap colours, the score for the player to move must be identical.
+// That catches mistakes in how Black's table positions are calculated.
+
 #include <gtest/gtest.h>
 
 #include <cctype>

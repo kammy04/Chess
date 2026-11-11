@@ -1,3 +1,8 @@
+// =============================================================================
+// game_test.cpp: whole-game rules: checkmate, draws, undo, reset, input parsing
+// =============================================================================
+// Moves are typed as text ("e2e4"), exactly like a person playing.
+
 #include <gtest/gtest.h>
 
 #include <initializer_list>

@@ -1,3 +1,16 @@
+// =============================================================================
+// game.hpp: a whole game: the board plus its history and the end-of-game rules
+// =============================================================================
+// Board answers "what's the position and what moves exist?".
+// Game answers "is this move allowed right now, and is the game over?", which
+// needs the HISTORY of the game (e.g. a draw when the same position appears
+// three times). Keeping them apart means the search can use a plain, fast
+// Board without paying for history it doesn't need.
+//
+// New C++ ideas: FUNCTION OVERLOADING (two functions with the same name),
+// a delegating constructor, and a function that's declared but defined
+// in a different file (describe).
+
 #pragma once
 
 #include <optional>
@@ -10,44 +23,47 @@
 
 namespace chess {
 
+// The possible states of a game.
 enum class GameResult {
     Ongoing,
     WhiteWinsByCheckmate,
     BlackWinsByCheckmate,
-    Stalemate,
-    FiftyMoveRule,
-    ThreefoldRepetition,
-    InsufficientMaterial,
+    Stalemate,             // no legal moves but not in check: a draw
+    FiftyMoveRule,         // 50 moves each with no capture or pawn move: a draw
+    ThreefoldRepetition,   // same position 3 times: a draw
+    InsufficientMaterial,  // nobody has enough pieces left to checkmate: a draw
 };
 
+// A FREE FUNCTION (not inside any class): turns a result into readable text.
 [[nodiscard]] std::string_view describe(GameResult result);
 
-// A game in progress: the board plus everything that depends on the game's
-// history rather than the current position alone (repetition, undo, reset).
-//
-// Board answers "what moves exist here?"; Game answers "is this move allowed
-// now, and is the game over?". Keeping them separate means the search can use
-// a bare Board without paying for history bookkeeping it doesn't need.
 class Game {
 public:
-    Game();                           // standard starting position
-    explicit Game(const Board& start); // any position, e.g. from FEN
+    Game();                             // a new game from the standard start
+    explicit Game(const Board& start);  // a new game from any position (e.g. loaded from FEN)
 
+    // Getters returning CONST REFERENCES: the caller gets read-only access to
+    // our actual Board / move list, with no copy made.
     [[nodiscard]] const Board& board() const noexcept { return board_; }
     [[nodiscard]] const std::vector<Move>& moveHistory() const noexcept { return moves_; }
     [[nodiscard]] std::vector<Move> legalMoves() const;
 
-    // Turns user text like "e2e4" or "e7e8q" into the matching legal move.
-    // A promotion without a piece letter ("e7e8") defaults to a queen.
+    // Turns typed text like "e2e4" or "e7e8q" into the matching legal move,
+    // or returns nothing (an empty optional) if it isn't one. "e7e8" without
+    // a letter means promote to a queen.
     [[nodiscard]] std::optional<Move> parseMove(std::string_view text) const;
 
-    // Both return false (and change nothing) if the move is illegal or the
-    // game is already over.
+    // FUNCTION OVERLOADING: two functions named `play` with different
+    // parameter types. C++ picks the right one from what you pass:
+    //   game.play(someMove);   // calls the first
+    //   game.play("e2e4");     // calls the second
+    // Both return true if the move was played, false (changing nothing) if
+    // it's illegal or the game is already over.
     bool play(const Move& move);
     bool play(std::string_view text);
 
-    bool undo();  // false if there is nothing to undo
-    void reset(); // back to the starting position of this game
+    bool undo();   // take back the last move; false if there's nothing to undo
+    void reset();  // go back to this game's starting position
 
     [[nodiscard]] GameResult result() const;
     [[nodiscard]] bool isOver() const { return result() != GameResult::Ongoing; }
@@ -55,10 +71,10 @@ public:
 private:
     [[nodiscard]] bool insufficientMaterial() const;
 
-    Board start_;
-    Board board_;
-    std::vector<Move> moves_;
-    std::vector<std::string> positionKeys_;  // one per position reached, including the start
+    Board start_;                            // where this game began (for reset)
+    Board board_;                            // the current position
+    std::vector<Move> moves_;                // every move played, in order
+    std::vector<std::string> positionKeys_;  // every position reached (for repetition)
 };
 
 }  // namespace chess

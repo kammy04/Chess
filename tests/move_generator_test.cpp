@@ -1,3 +1,15 @@
+// =============================================================================
+// move_generator_test.cpp: proves the move generator follows the rules
+// =============================================================================
+// Two kinds of test:
+//   1. PERFT tests: count every move sequence to a given depth and compare
+//      with numbers published by the chess-programming community. If even
+//      one rule is wrong anywhere, the counts won't match.
+//   2. Targeted tests for individual rules (pins, castling, en passant, ...).
+//
+// New test idea here: a PARAMETERISED test (TEST_P). One test body runs once
+// for every row in a table of inputs (the INSTANTIATE_TEST_SUITE_P list).
+
 #include <gtest/gtest.h>
 
 #include <algorithm>
@@ -202,7 +214,6 @@ TEST(MoveGenerator, BlockedPawnCannotPush) {
 }
 
 TEST(MoveGenerator, SlidersStopAtPieces) {
-    // The C version let the queen jump over one piece. Not here.
     // Queen a1, black pawn c3 on the diagonal, own pawn a3 on the file.
     Board board = Board::fromFen("4k3/8/8/8/8/P1p5/8/Q3K3 w - - 0 1");
     const auto moves = MoveGenerator::generateLegal(board);

@@ -1,3 +1,9 @@
+// =============================================================================
+// board_test.cpp: tests for Board: FEN reading/writing, make/unmake, attacks
+// =============================================================================
+// (How GoogleTest works is explained at the top of types_test.cpp.)
+// `using test::sq;` lets us write sq("e4") for the square number of e4.
+
 #include <gtest/gtest.h>
 
 #include <stdexcept>
@@ -19,7 +25,7 @@ TEST(Board, DefaultIsStartingPosition) {
     EXPECT_EQ(board.enPassantSquare(), NoSquare);
     EXPECT_EQ(board.kingSquare(Color::White), sq("e1"));
     EXPECT_EQ(board.kingSquare(Color::Black), sq("e8"));
-    EXPECT_TRUE(board.pieceAt(sq("d1")).is(Color::White, PieceType::Queen));  // the C version had K and Q swapped
+    EXPECT_TRUE(board.pieceAt(sq("d1")).is(Color::White, PieceType::Queen));  // queen starts on her own colour
     EXPECT_FALSE(board.canUnmake());
 }
 

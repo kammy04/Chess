@@ -1,3 +1,10 @@
+// =============================================================================
+// search_test.cpp: does the engine find good moves?
+// =============================================================================
+// Includes checkmate puzzles, and the most important test of all:
+// AlphaBetaMatchesMinimaxWithFewerNodes, which shows that the faster
+// algorithm gives exactly the same answer as the simple one.
+
 #include <gtest/gtest.h>
 
 #include "chess/board.hpp"

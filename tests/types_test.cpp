@@ -1,14 +1,40 @@
-#include <gtest/gtest.h>
+// =============================================================================
+// types_test.cpp: tests for types.hpp and move.hpp. READ THIS TEST FILE FIRST.
+// =============================================================================
+// HOW TESTS WORK (GoogleTest)
+// A test is a small piece of code that runs part of the engine and CHECKS
+// the answer. If a check fails, the test reports which line failed and what
+// the actual vs expected values were. Run them all with:
+//     ctest --test-dir build              (summary)
+//     ./build/chess_tests                 (detailed, one line per test)
+//
+//   TEST(GroupName, TestName) { ... }
+//       Defines one test. (TEST is a MACRO: a shortcut the compiler expands
+//       into more code before compiling. Macros are written in CAPITALS.)
+//   EXPECT_EQ(actual, expected)   check two values are equal
+//   EXPECT_NE(a, b)               check they're NOT equal
+//   EXPECT_TRUE(x) / EXPECT_FALSE(x)
+//   EXPECT_LT(a, b) / EXPECT_GT(a, b)   less than / greater than
+//   EXPECT_THROW(code, ExceptionType)   check the code throws that exception
+//   ASSERT_...    same as EXPECT_..., but stops THIS test immediately on
+//                 failure (use when continuing would make no sense)
+//   EXPECT_...(...) << "extra text"   printed only if the check fails
+//
+// Note: the test files have far fewer comments than the engine. Each test's
+// NAME says what it checks. Read them as examples of how to USE the engine.
+
+#include <gtest/gtest.h>   // the GoogleTest library
 
 #include <sstream>
 
 #include "chess/move.hpp"
 #include "chess/types.hpp"
-#include "test_util.hpp"
+#include "test_util.hpp"   // small helpers shared by all test files
 
 namespace chess {
 namespace {
 
+// Checks the square numbering shown in the diagram in types.hpp.
 TEST(Types, SquareNumberingIsLittleEndianRankFile) {
     EXPECT_EQ(test::sq("a1"), 0);
     EXPECT_EQ(test::sq("h1"), 7);
