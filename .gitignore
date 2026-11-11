@@ -1,0 +1,14 @@
+# Build output
+build/
+build-*/
+*.o
+a.out
+/chess
+*.profraw
+*.profdata
+coverage/
+
+# Editor / OS
+.DS_Store
+.vscode/
+compile_commands.json
