@@ -1,11 +1,11 @@
 # Learning C++ with a Chess Engine
 
-This guide assumes you have never seen C++ before. It has four parts:
+My notes from learning C++ from scratch by building this engine. They have four parts:
 
 1. **[How to study this project](#1-how-to-study-this-project)**: what to read, in what order.
 2. **[C++ from zero](#2-c-from-zero)**: every language feature used in the code, explained simply, with a pointer to where you can see it.
 3. **[Chess-engine words](#3-chess-engine-words)**: a glossary of the chess and engine terms used here.
-4. **[How the engine works, and why](#4-how-the-engine-works-and-why)**: design decisions, written the way you'd explain them in an interview.
+4. **[How the engine works, and why](#4-how-the-engine-works-and-why)**: design decisions, written the way I'd explain them in an interview.
 
 At the end are [the measured baseline](#5-the-measured-baseline), the [known weaknesses and roadmap](#6-known-weaknesses-and-roadmap), the [mistakes log](#7-mistakes-log) and the [check-your-understanding questions](#8-check-your-understanding).
 
@@ -348,7 +348,7 @@ main.cpp ──► Search::findBestMove(board, depth)
            best move + score + node count + time
 ```
 
-Each design choice below is written as you could explain it in an interview.
+Each design choice below is written the way I'd explain it in an interview.
 
 **"How do you represent the board?"**
 > "As 64 squares in a fixed-size array, `std::array<Piece, 64>`, numbered a1 = 0 to h8 = 63. Each `Piece` is a type plus a colour, both strongly typed enums, so the compiler stops me mixing them up. I also store where the two kings are, because legality checking constantly asks 'is my king attacked?'. This layout is called a mailbox. It's simple to get right and easy to verify. Bitboards, one 64-bit number per piece type, are faster, and they're on my roadmap once I can measure the gain."
@@ -414,7 +414,7 @@ Honest weaknesses of the current engine:
 - **Simple move generation.** It loops over all 64 squares and creates a new list at every position.
 - **No endgame king table.** The king hides in the corner even when it should come out.
 
-Roadmap. **You** write each step and I review it. Every step is measured before and after with `--bench`:
+Roadmap. Every step is measured before and after with `--bench`:
 1. Move ordering (captures first, MVV-LVA)
 2. Iterative deepening with a time limit
 3. Quiescence search
@@ -427,35 +427,35 @@ Roadmap. **You** write each step and I review it. Every step is measured before 
 
 ## 7. Mistakes log
 
-Mistakes and what each one taught. Yours will be added here as we go.
+Mistakes and what each one taught.
 
-| Who | Mistake | Lesson |
-|---|---|---|
-| Claude | Wrote the "mate in 2" test at depth 3, and it failed | The search only notices "no legal moves = checkmate" at a position it *expands* (depth > 0). Positions at depth 0 just get a score. So a mate delivered on ply 3 is detected at depth 4. Mate in N moves needs depth 2N. The failing test exposed a wrong assumption, which is exactly what tests are for |
+| Mistake | Lesson |
+|---|---|
+| Wrote the "mate in 2" test at depth 3, and it failed | The search only notices "no legal moves = checkmate" at a position it *expands* (depth > 0). Positions at depth 0 just get a score. So a mate delivered on ply 3 is detected at depth 4. Mate in N moves needs depth 2N. The failing test exposed a wrong assumption, which is exactly what tests are for |
 
 ---
 
 ## 8. Check your understanding
 
-Answer in your own words, out loud or in writing. Answers get recorded here.
+Questions to answer in my own words, to check I really understand each part.
 
 ### Part 1: types.hpp, types.cpp, move.hpp, move.cpp
 1. **Explain this:** what's the difference between `'e'` and `"e"` in C++, and why does `squareToString` use `static_cast<char>`?
 2. **What happens if** you call `parseSquare("z9")`? What does it return, and how should the caller check it?
 3. **Explain this:** in `Piece`, what does the word `const` mean in `bool isEmpty() const`, and why does it matter?
 
-*Your answers:*
+*My answers:*
 
 ### Part 2: board.hpp, board.cpp
 1. **Explain this:** what's the difference between `void f(Board b)`, `void f(Board& b)` and `void f(const Board& b)`? Which one would you use to print a board, and why?
 2. **What happens if** `unmakeMove` forgot to restore `enPassant_`? Which test would fail?
 3. **Explain this:** `history_` is a `std::vector` that requests memory as it grows. Who gives that memory back, and when?
 
-*Your answers:*
+*My answers:*
 
 ### Part 3: move generator, evaluator, search, game
 1. **Explain this:** `MoveGenerator::generateLegal` takes `Board&`, but `Game::legalMoves()` is `const`. How does `legalMoves` call it without breaking its promise?
 2. **What happens if** `Search::findBestMove` used `>=` instead of `>` when comparing scores?
 3. **Explain this, interview-style:** how does alpha-beta give the same answer as minimax while looking at fewer positions?
 
-*Your answers:*
+*My answers:*
